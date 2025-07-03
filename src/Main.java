@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         int playerWinns = 0;
         int computerWinns = 0;
-        System.out.println("tic tac toe game ");
+        System.out.println("tic tac toe game  ");
 
 
         char [][] board = {
