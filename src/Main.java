@@ -6,28 +6,30 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int playerWinns = 0;
         int copmuterWinss = 0;
-        System.out.println("tic tac toe game  ");
+        System.out.println("tic tac toe");
+        System.out.println("Enter your name :");
+        String name = scanner.nextLine();
         System.out.println("Enter 1 if you want one round :");
         System.out.println("Enter 2 if you want three rounds :");
         int chose = scanner.nextInt();
+        char[][] board = {
+                {' ', ' ', ' '},
+                {' ', ' ', ' '},
+                {' ', ' ', ' '}
+        };
         if (chose == 1) {
             while (true) {
-                char[][] board = {
-                        {' ', ' ', ' '},
-                        {' ', ' ', ' '},
-                        {' ', ' ', ' '}
-                };
                 printBoard(board);
                 playerMove(board, 'x');
                 if (checkWinner(board, 'x')) {
                     printBoard(board);
-                    System.out.println("The player X wins !");
+                    System.out.println(name+" wins !");
                     break;
                 }
                 computerMove(board, 'O');
                 if (checkWinner(board, 'o')) {
                     printBoard(board);
-                    System.out.println("The player 0 wins !");
+                    System.out.println("Computer wins !");
                     break;
                 }
 
@@ -35,39 +37,39 @@ public class Main {
         } else if (chose == 2) {
             int rounds = 3;
             while(rounds>0) {
-                char[][] board = {
+                char[][] board1 = {
                         {' ', ' ', ' '},
                         {' ', ' ', ' '},
                         {' ', ' ', ' '}
                 };
                 while (true) {
-                    printBoard(board);
-                    playerMove(board, 'x');
-                    if (checkWinner(board, 'x')) {
-                        printBoard(board);
-                        System.out.println("The player wins The round !");
+                    printBoard(board1);
+                    playerMove(board1, 'x');
+                    if (checkWinner(board1, 'x')) {
+                        printBoard(board1);
+                        System.out.println(name+" wins The round !");
                         playerWinns++;
                         break;
                     }
-                    computerMove(board, 'O');
-                    if (checkWinner(board, 'o')) {
-                        printBoard(board);
+                    computerMove(board1, 'O');
+                    if (checkWinner(board1, 'o')) {
+                        printBoard(board1);
                         System.out.println("The Computer wins The round!");
                         copmuterWinss++;
                         break;
                     }
 
                 }
-                System.out.println("players winns "+ playerWinns);
+                System.out.println(name+" winns "+ playerWinns);
                 System.out.println("computer winns "+copmuterWinss);
                 rounds--;
                 if (playerWinns == 2){
-                    System.out.println("The player winns The game ");
+                    System.out.println(name+" winns The game ");
                     System.out.println("The End");
                     break;
                 }
                 else if (copmuterWinss == 2){
-                        System.out.println("The player winns The game ");
+                        System.out.println("Computer winns The game ");
                         System.out.println("The End");
                         break;
                 }
@@ -143,12 +145,9 @@ public class Main {
         if (board[0][0] == check && board[1][1] == check && board[2][2] == check) {
             return true;
         }
-
         if (board[0][2] == check && board[1][1] == check && board[2][0] == check) {
             return true;
         }
-
         return false;
     }
-
 }
