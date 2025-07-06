@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -73,11 +74,75 @@ public class Main {
                         System.out.println("The End");
                         break;
                 }
-
             }
 
         }
-    } // out of the main
+        else {
+            System.out.println("invalid input");
+        }
+
+       // todo Calculator
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Calculator : ");
+//        System.out.println("Enter 1 to Add or 2 to Sub or 3 to Mul or 4 to div");
+//        int chose = scanner.nextInt();
+//        int first ;
+//        int second;
+//        try {
+//            switch (chose){
+//                case 1 :
+//                    System.out.println("Enter first number :");
+//                    first = scanner.nextInt();
+//                    System.out.println("Enter second number :");
+//                     second = scanner.nextInt();
+//                    System.out.println("The result is : "+add(first,second));
+//                    break;
+//
+//                case 2 :
+//                    System.out.println("Enter first number :");
+//                     first = scanner.nextInt();
+//                    System.out.println("Enter second number :");
+//                     second = scanner.nextInt();
+//                    System.out.println("The result is : "+sub(first,second));
+//                    break;
+//
+//                case 3 :
+//                    System.out.println("Enter first number :");
+//                    first = scanner.nextInt();
+//                    System.out.println("Enter second number :");
+//                    second = scanner.nextInt();
+//                    System.out.println("The result is : "+mul(first,second));
+//                    break;
+//
+//                case 4 :
+//                    System.out.println("Enter first number :");
+//                    first = scanner.nextInt();
+//                    System.out.println("Enter second number :");
+//                    second = scanner.nextInt();
+//                    System.out.println("The result is : "+div(first,second));
+//                    break;
+//
+//                default:
+//                    System.out.println("Invalid choice! Please enter a number between 1 and 4.");
+//            }
+//        }catch (InputMismatchException e){
+//            System.out.println("Invalid input Enter number please ");
+//        }
+
+    }// out of the main
+
+    public static Double add(double a , double b) {
+        return a + b;
+    }
+    public static Double sub(double a , double b){
+        return a - b;
+    }
+    public static Double mul(double a , double b){
+        return a * b;
+    }
+    public static Double div(double a , double b){
+        return a / b;
+    }
 
     public static void printBoard(char[][] arr) {
         for (int i = 0; i < 3; i++) {
@@ -96,21 +161,26 @@ public class Main {
 
     public static void playerMove(char[][] board, char player) {
         Scanner scanner = new Scanner(System.in);
-        int row;
-        int col;
-        while (true) {
-            System.out.println("Enter row (0, 1, 2): ");
-            row = scanner.nextInt();
-            System.out.println("Enter column (0, 1, 2): ");
-            col = scanner.nextInt();
-            if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ') {
-                board[row][col] = player;
-                break;
-            } else {
-                System.out.println("the place was chosen !");
-            }
+        try {
+            int row;
+            int col;
+            while (true) {
+                System.out.println("Enter row (0, 1, 2): ");
+                row = scanner.nextInt();
+                System.out.println("Enter column (0, 1, 2): ");
+                col = scanner.nextInt();
+                if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ') {
+                    board[row][col] = player;
+                    break;
+                } else {
+                    System.out.println("the place was chosen !");
+                }
 
+            }
+        }catch (InputMismatchException e){
+            System.out.println("Invalid input, please Enter number ");
         }
+
     }
 
     public static void computerMove(char[][] board, char computer) {
@@ -149,5 +219,22 @@ public class Main {
             return true;
         }
         return false;
+    }
+
+    public static boolean isBoardFull(char[][] board) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == ' ') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void checkForTie(char[][] board) {
+        if (isBoardFull(board) && !checkWinner(board, 'X') && !checkWinner(board, 'O')) {
+            System.out.println("It's a tie! The board is full but no one won.");
+        }
     }
 }
